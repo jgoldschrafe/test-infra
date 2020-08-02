@@ -5,5 +5,4 @@ Vault.
 
 Dependencies
 ============
-- `bootstrap-pki`
-- `nginx-ingress`
+None
