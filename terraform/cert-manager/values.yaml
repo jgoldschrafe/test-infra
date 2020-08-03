@@ -1,0 +1,5 @@
+---
+installCRDs: true
+
+ingressShim:
+  defaultIssuerName: default-issuer
