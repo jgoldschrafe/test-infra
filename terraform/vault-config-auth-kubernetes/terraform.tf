@@ -5,5 +5,5 @@
 provider "vault" {
   version = "~> 2.12"
 
-  address = "https://vault.test.local:30443"
+  address = "https://vault.test.local"
 }
