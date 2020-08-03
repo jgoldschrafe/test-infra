@@ -12,7 +12,12 @@ resource "kubernetes_manifest" "openldap_tls_certificate" {
       secretName = "openldap-tls"
       commonName = "ldap.test.local"
       dnsNames = [
-        "ldap.test.local"
+        "ldap.test.local",
+        "openldap.openldap.svc.cluster.local",
+        "openldap.openldap.svc.cluster",
+        "openldap.openldap.svc",
+        "openldap.openldap",
+        "openldap",
       ],
       issuerRef = {
         name = "default-issuer"
