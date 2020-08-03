@@ -1,0 +1,13 @@
+---
+master:
+  jenkinsUrl: 'https://jenkins.test.local:30443'
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    hostName: jenkins.test.local
+    path: /
+    tls:
+      - secretName: jenkins-tls
+        hosts:
+          - jenkins.test.local
