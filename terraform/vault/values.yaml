@@ -1,0 +1,23 @@
+---
+certs:
+  secretName: vault-certificate
+
+server:
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      kubernetes.io/tls-acme: "false"
+    hosts:
+      - host: vault.test.local
+        paths: []
+    tls:
+      - secretName: vault-certificate
+        hosts:
+          - vault.test.local
+
+  standalone:
+    enabled: true
+
+  dataStorage:
+    storageClass: vault-data
