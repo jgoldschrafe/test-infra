@@ -15,9 +15,3 @@ provider "kubernetes" {
 provider "kubernetes-alpha" {
   config_path = "~/.kube/config"
 }
-
-provider "vault" {
-  version = "~> 2.12"
-
-  address = "https://vault.test.local:30443"
-}
