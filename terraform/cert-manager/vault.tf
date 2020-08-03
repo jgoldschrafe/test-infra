@@ -7,7 +7,7 @@ resource "vault_pki_secret_backend_role" "pki_default_issuer" {
   name    = "default-issuer"
 
   allowed_domains = [
-    "cluster.svc",
+    "cluster.local",
     "test.local",
   ]
 
@@ -28,10 +28,10 @@ resource "vault_policy" "pki_default_issuer" {
   name = "pki-default-issuer"
 
   policy = <<EOT
-path "pki/*"               { capabilities = ["read", "list"] }
-path "pki/roles/default"   { capabilities = ["create", "update"] }
-path "pki/sign/default"    { capabilities = ["create", "update"] }
-path "pki/issue/default"   { capabilities = ["create"] }
+path "pki/*"                      { capabilities = ["read", "list"] }
+path "pki/roles/default-issuer"   { capabilities = ["create", "update"] }
+path "pki/sign/default-issuer"    { capabilities = ["create", "update"] }
+path "pki/issue/default-issuer"   { capabilities = ["create"] }
 EOT
 }
 
