@@ -1,0 +1,8 @@
+---
+tls:
+  enabled: true
+  secret: openldap-tls
+
+persistence:
+  enabled: true
+  storageClass: openldap-data
