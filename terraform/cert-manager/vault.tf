@@ -6,15 +6,7 @@ resource "vault_pki_secret_backend_role" "pki_default_issuer" {
   backend = data.terraform_remote_state.vault_config_pki.outputs.vault_mount_pki_path
   name    = "default-issuer"
 
-  allowed_domains = [
-    "cluster.local",
-    "test.local",
-  ]
-
-  allow_localhost    = true
-  allow_subdomains   = true
-  allow_glob_domains = true
-  max_ttl            = "259200"
+  allow_any_name = true
 
   key_usage = [
     "DigitalSignature",
@@ -22,6 +14,8 @@ resource "vault_pki_secret_backend_role" "pki_default_issuer" {
     "KeyEncipherment",
     "ServerAuth",
   ]
+
+  max_ttl = "259200"
 }
 
 resource "vault_policy" "pki_default_issuer" {
