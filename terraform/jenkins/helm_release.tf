@@ -1,5 +1,5 @@
 #
-# Helm release for Vault server
+# Helm release for Jenkins
 #
 
 resource "helm_release" "jenkins" {

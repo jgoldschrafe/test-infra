@@ -1,5 +1,5 @@
 #
-# Helm release for Vault server
+# Helm release for OpenLDAP server
 #
 
 resource "helm_release" "openldap" {
