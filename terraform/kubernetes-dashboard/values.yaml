@@ -1,4 +1,6 @@
 ---
+protocolHttp: true
+
 ingress:
   enabled: true
   annotations:
