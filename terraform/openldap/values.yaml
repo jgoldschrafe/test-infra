@@ -1,4 +1,8 @@
 ---
+env:
+  LDAP_DOMAIN: test.local
+  LDAP_ORGANISATION: Test Infrastructure
+
 tls:
   enabled: true
   secret: openldap-tls
@@ -6,3 +10,5 @@ tls:
 persistence:
   enabled: true
   storageClass: openldap-data
+
+logLevel: trace
