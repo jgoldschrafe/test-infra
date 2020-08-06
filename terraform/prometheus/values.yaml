@@ -1,0 +1,44 @@
+---
+alertmanager:
+  baseURL: https://alertmanager.test.local
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    hosts:
+      - alertmanager.test.local
+    tls:
+      - secretName: alertmanager-tls
+        hosts:
+          - alertmanager.test.local
+  persistentVolume:
+    storageClass: alertmanager-data
+
+pushgateway:
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    hosts:
+      - pushgateway.test.local
+    tls:
+      - secretName: alertmanager-tls
+        hosts:
+          - pushgateway.test.local
+  persistentVolume:
+    storageClass: pushgateway-data
+
+server:
+  baseURL: https://prometheus.test.local
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    hosts:
+      - prometheus.test.local
+    tls:
+      - secretName: prometheus-tls
+        hosts:
+          - prometheus.test.local
+  persistentVolume:
+    storageClass: prometheus-data
