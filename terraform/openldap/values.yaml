@@ -3,6 +3,11 @@ env:
   LDAP_DOMAIN: test.local
   LDAP_ORGANISATION: Test Infrastructure
 
+service:
+  type: NodePort
+  ldapNodePort: 30389
+  sslLdapNodePort: 30636
+
 tls:
   enabled: true
   secret: openldap-tls
