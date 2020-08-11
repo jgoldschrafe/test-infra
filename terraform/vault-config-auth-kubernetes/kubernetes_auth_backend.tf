@@ -4,36 +4,36 @@
 
 resource "null_resource" "kubernetes_host" {
   provisioner "local-exec" {
-    command = "kubectl --context=docker-desktop exec -n vault vault-0 echo https://$${KUBERNETES_PORT_443_TCP_ADDR}:443 > tmp/kubernetes_host"
+    command = "kubectl --context=docker-desktop exec -n vault vault-0 -- sh -c 'echo -n https://$${KUBERNETES_PORT_443_TCP_ADDR}:443' > ${path.module}/tmp/kubernetes_host"
   }
 }
 
 data "local_file" "kubernetes_host" {
-  filename = "tmp/kubernetes_host"
+  filename = "${path.module}/tmp/kubernetes_host"
 
   depends_on = [null_resource.kubernetes_host]
 }
 
 resource "null_resource" "kubernetes_ca_certificate" {
   provisioner "local-exec" {
-    command = "kubectl --context=docker-desktop exec -n vault vault-0 cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt > tmp/kubernetes_ca.crt"
+    command = "kubectl --context=docker-desktop exec -n vault vault-0 -- cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt > ${path.module}/tmp/kubernetes_ca.crt"
   }
 }
 
 data "local_file" "kubernetes_ca_certificate" {
-  filename = "tmp/kubernetes_ca.crt"
+  filename = "${path.module}/tmp/kubernetes_ca.crt"
 
   depends_on = [null_resource.kubernetes_ca_certificate]
 }
 
 resource "null_resource" "service_token" {
   provisioner "local-exec" {
-    command = "kubectl --context=docker-desktop exec -n vault vault-0 cat /var/run/secrets/kubernetes.io/serviceaccount/token > tmp/service-token"
+    command = "kubectl --context=docker-desktop exec -n vault vault-0 -- cat /var/run/secrets/kubernetes.io/serviceaccount/token > ${path.module}/tmp/service-token"
   }
 }
 
 data "local_file" "service_token" {
-  filename = "tmp/service-token"
+  filename = "${path.module}/tmp/service-token"
 
   depends_on = [null_resource.service_token]
 }
