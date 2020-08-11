@@ -1,0 +1,9 @@
+---
+persistence:
+  enabled: true
+  storageClass: postgresql-data
+  size: 10Gi
+
+master:
+  podAnnotations:
+    consul.hashicorp.com/connect-inject: "true"
