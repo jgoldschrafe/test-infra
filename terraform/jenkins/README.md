@@ -6,6 +6,7 @@ Helm chart.
 Dependencies
 ============
 - `cert-manager`
+- `jenkins-storage`
 - `nginx-ingress`
 
 Known Issues

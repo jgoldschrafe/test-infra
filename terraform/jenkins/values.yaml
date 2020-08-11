@@ -6,9 +6,12 @@ master:
     annotations:
       kubernetes.io/ingress.class: nginx
     hostName: jenkins.test.local
-    paths:
-      - /
+    path: /
     tls:
       - secretName: jenkins-tls
         hosts:
           - jenkins.test.local
+
+persistence:
+  enabled: true
+  storageClass: jenkins-data

@@ -3,7 +3,7 @@
 #
 
 resource "helm_release" "jenkins" {
-  namespace = kubernetes_namespace.jenkins.metadata[0].name
+  namespace = data.terraform_remote_state.jenkins_storage.outputs.namespace
   name      = "jenkins"
 
   repository = "https://kubernetes-charts.storage.googleapis.com"
