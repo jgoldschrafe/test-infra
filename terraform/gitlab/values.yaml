@@ -1,0 +1,39 @@
+---
+global:
+  edition: ce
+  hosts:
+    domain: test.local
+    https: true
+    gitlab:
+      name: gitlab.test.local
+      https: true
+    registry:
+      name: registry.test.local
+      https: true
+    minio:
+      name: minio.test.local
+      https: true
+
+  ingress:
+    configureCertmanager: false
+
+  grafana:
+    enabled: false
+
+  minio:
+    enabled: false
+
+postgresql:
+  persistence:
+    enabled: true
+    storageClass: gitlab-postgresql-data
+    size: 10Gi
+
+redis:
+  persistence:
+    enabled: true
+    storageClass: gitlab-redis-data
+    size: 10Gi
+
+prometheus:
+  install: false
