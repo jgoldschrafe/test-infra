@@ -1,5 +1,8 @@
 ---
 master:
+  limits:
+    memory: 384Mi
+
   jenkinsUrl: 'https://jenkins.test.local:30443'
   ingress:
     enabled: true
