@@ -11,8 +11,15 @@ alertmanager:
       - secretName: alertmanager-tls
         hosts:
           - alertmanager.test.local
+
   persistentVolume:
     storageClass: alertmanager-data
+
+  podAnnotations:
+    consul.hashicorp.com/connect-inject: "true"
+
+  strategy:
+    type: Recreate
 
 pushgateway:
   ingress:
@@ -25,8 +32,15 @@ pushgateway:
       - secretName: alertmanager-tls
         hosts:
           - pushgateway.test.local
+
   persistentVolume:
     storageClass: pushgateway-data
+
+  podAnnotations:
+    consul.hashicorp.com/connect-inject: "true"
+
+  strategy:
+    type: Recreate
 
 server:
   baseURL: https://prometheus.test.local
@@ -40,5 +54,14 @@ server:
       - secretName: prometheus-tls
         hosts:
           - prometheus.test.local
+
   persistentVolume:
     storageClass: prometheus-data
+
+  podAnnotations:
+    consul.hashicorp.com/connect-inject: "true"
+    consul.hashicorp.com/connect-service: "prometheus-server"
+    consul.hashicorp.com/connect-service-port: "9090"
+
+  strategy:
+    type: Recreate
