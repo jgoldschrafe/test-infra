@@ -1,0 +1,12 @@
+---
+loki:
+  serviceScheme: https
+
+  ingress:
+    enabled: true
+    hostName: loki.test.local
+    path: /
+    tls:
+      - secretName: loki-tls
+        hosts:
+          - loki.test.local
