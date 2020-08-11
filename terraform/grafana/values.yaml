@@ -16,3 +16,6 @@ ingress:
 persistence:
   enabled: true
   storageClassName: grafana-data
+
+podAnnotations:
+  "consul.hashicorp.com/connect-inject": "true"
