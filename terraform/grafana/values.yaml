@@ -1,0 +1,18 @@
+---
+grafana.ini:
+  server:
+    domain: grafana.test.local
+
+ingress:
+  enabled: true
+  path: /
+  hosts:
+    - grafana.test.local
+  tls:
+    - secretName: grafana-tls
+      hosts:
+        - grafana.test.local
+
+persistence:
+  enabled: true
+  storageClassName: grafana-data
