@@ -1,14 +1,46 @@
 #
-# Kubernetes auth configuration for Vault
+# Collect Kubernetes cluster information for auth
 #
 
-# TODO: Automate the collection of this information from the cluster
-
-locals {
-  kubernetes_host    = "https://10.96.0.1:443"
-  kubernetes_ca_cert = "${file("files/kubernetes_ca.crt")}"
-  token_reviewer_jwt = "${file("files/service-token")}"
+resource "null_resource" "kubernetes_host" {
+  provisioner "local-exec" {
+    command = "kubectl --context=docker-desktop exec -n vault vault-0 echo https://$${KUBERNETES_PORT_443_TCP_ADDR}:443 > tmp/kubernetes_host"
+  }
 }
+
+data "local_file" "kubernetes_host" {
+  filename = "tmp/kubernetes_host"
+
+  depends_on = [null_resource.kubernetes_host]
+}
+
+resource "null_resource" "kubernetes_ca_certificate" {
+  provisioner "local-exec" {
+    command = "kubectl --context=docker-desktop exec -n vault vault-0 cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt > tmp/kubernetes_ca.crt"
+  }
+}
+
+data "local_file" "kubernetes_ca_certificate" {
+  filename = "tmp/kubernetes_ca.crt"
+
+  depends_on = [null_resource.kubernetes_ca_certificate]
+}
+
+resource "null_resource" "service_token" {
+  provisioner "local-exec" {
+    command = "kubectl --context=docker-desktop exec -n vault vault-0 cat /var/run/secrets/kubernetes.io/serviceaccount/token > tmp/service-token"
+  }
+}
+
+data "local_file" "service_token" {
+  filename = "tmp/service-token"
+
+  depends_on = [null_resource.service_token]
+}
+
+#
+# Kubernetes auth configuration for Vault
+#
 
 resource "vault_auth_backend" "kubernetes" {
   type = "kubernetes"
@@ -17,7 +49,7 @@ resource "vault_auth_backend" "kubernetes" {
 resource "vault_kubernetes_auth_backend_config" "kubernetes" {
   backend = vault_auth_backend.kubernetes.path
 
-  kubernetes_host    = local.kubernetes_host
-  kubernetes_ca_cert = local.kubernetes_ca_cert
-  token_reviewer_jwt = local.token_reviewer_jwt
+  kubernetes_host    = data.local_file.kubernetes_host.content
+  kubernetes_ca_cert = data.local_file.kubernetes_ca_certificate.content
+  token_reviewer_jwt = data.local_file.service_token.content
 }
