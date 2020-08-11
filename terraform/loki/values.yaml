@@ -4,9 +4,15 @@ loki:
 
   ingress:
     enabled: true
-    hostName: loki.test.local
-    path: /
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    hosts:
+    - host: loki.test.local
+      paths: ["/"]
     tls:
-      - secretName: loki-tls
-        hosts:
-          - loki.test.local
+    - secretName: loki-tls
+      hosts:
+      - loki.test.local
+
+  podAnnotations:
+    "consul.hashicorp.com/connect-inject": "true"

@@ -14,18 +14,3 @@ resource "helm_release" "loki" {
     "${file("values.yaml")}"
   ]
 }
-
-#
-# Helm release for ingress resource
-#
-
-resource "helm_release" "loki_ingress" {
-  namespace = "loki"
-  name      = "loki-ingress"
-
-  chart = "../../charts/loki-ingress"
-
-  values = [
-    "${file("values.yaml")}"
-  ]
-}
