@@ -12,6 +12,9 @@ master:
         hosts:
           - jenkins.test.local
 
+  podAnnotations:
+    consul.hashicorp.com/connect-inject: "true"
+
 persistence:
   enabled: true
   storageClass: jenkins-data
