@@ -1,19 +1,37 @@
 ---
 buckets:
-- name: gitlab
-  policy: none
-  purge: false
+  - name: gitlab-artifacts
+    policy: none
+    purge: false
+  - name: gitlab-backup
+    policy: none
+    purge: false
+  - name: gitlab-lfs
+    policy: none
+    purge: false
+  - name: gitlab-packages
+    policy: none
+    purge: false
+  - name: gitlab-registry
+    policy: none
+    purge: false
+  - name: gitlab-tmp
+    policy: none
+    purge: false
+  - name: gitlab-uploads
+    policy: none
+    purge: false
 
 ingress:
   enabled: true
   annotations:
     kubernetes.io/ingress.class: nginx
   hosts:
-  - minio.test.local
-  tls:
-  - secretName: minio-tls
-    hosts:
     - minio.test.local
+  tls:
+    - secretName: minio-tls
+      hosts:
+        - minio.test.local
 
 resources:
   requests:
