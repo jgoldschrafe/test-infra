@@ -16,6 +16,7 @@ client:
 
 dns:
   enabled: true
+  clusterIP: 10.99.247.81
 
 ingressGateways:
   enabled: true

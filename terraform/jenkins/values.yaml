@@ -6,7 +6,8 @@ master:
     annotations:
       kubernetes.io/ingress.class: nginx
     hostName: jenkins.test.local
-    path: /
+    paths:
+      - /
     tls:
       - secretName: jenkins-tls
         hosts:

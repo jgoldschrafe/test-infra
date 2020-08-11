@@ -21,3 +21,15 @@ server:
 
   dataStorage:
     storageClass: vault-data
+
+  #  extraInitContainers:
+  #    - name: vault-secrets-gen-installer
+  #      image: alpine
+  #      command: [sh, -c]
+  #      args:
+  #        - cd /tmp &&
+  #          wget https://github.com/sethvargo/vault-secrets-gen/releases/download/v0.0.6/vault-secrets-gen_0.0.6_linux_amd64.tgz -O vault-secrets-gen_0.0.6_linux_amd64.tar.gz &&
+  #          tar -xzf vault-secrets-gen_0.0.6_linux_amd64.tar.gz &&
+  #          mv vault-secrets-gen /usr/local/libexec/vault/vault-secrets-gen &&
+  #          chmod +x /usr/local/libexec/vault/vault-secrets-gen &&
+  #          setcap cap_ipc_lock=+ep /usr/local/libexec/vault/vault-secrets-gen
