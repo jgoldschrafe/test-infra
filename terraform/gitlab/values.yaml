@@ -4,15 +4,6 @@ global:
   hosts:
     domain: test.local
     https: true
-    gitlab:
-      name: gitlab.test.local
-      https: true
-    registry:
-      name: registry.test.local
-      https: true
-    minio:
-      name: minio.test.local
-      https: true
 
   psql:
     # TODO: Connect to PostgreSQL through Consul Connect
@@ -55,12 +46,18 @@ global:
 
   ingress:
     configureCertmanager: false
+    class: nginx
+    tls:
+      secretName: gitlab-tls
 
   grafana:
     enabled: false
 
   minio:
     enabled: false
+
+certmanager:
+  install: false
 
 gitlab:
   gitlab-shell:
