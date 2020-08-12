@@ -60,6 +60,12 @@ certmanager:
   install: false
 
 gitlab:
+  gitaly:
+    persistence:
+      enabled: true
+      storageClass: gitlab-gitaly-data
+      size: 10Gi
+
   gitlab-shell:
     minReplicas: 1
     maxReplicas: 1
@@ -97,10 +103,11 @@ prometheus:
   install: false
 
 redis:
-  persistence:
-    enabled: true
-    storageClass: gitlab-redis-data
-    size: 10Gi
+  master:
+    persistence:
+      enabled: true
+      storageClass: gitlab-redis-data
+      size: 10Gi
 
 registry:
   hpa:
