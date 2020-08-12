@@ -14,6 +14,45 @@ global:
       name: minio.test.local
       https: true
 
+  psql:
+    # TODO: Connect to PostgreSQL through Consul Connect
+    # host: localhost
+    host: postgresql.postgresql.svc.cluster.local
+    port: 5432
+    username: gitlab
+    password:
+      secret: gitlab-postgresql
+      key: password
+    database: gitlab
+
+  registry:
+    bucket: gitlab-registry
+
+  appConfig:
+    lfs:
+      bucket: gitlab-lfs
+      connection:
+        secret: rails-s3-minio
+        key: connection
+    artifacts:
+      bucket: gitlab-artifacts
+      connection:
+        secret: rails-s3-minio
+        key: connection
+    uploads:
+      bucket: gitlab-uploads
+      connection:
+        secret: rails-s3-minio
+        key: connection
+    packages:
+      bucket: gitlab-packages
+      connection:
+        secret: rails-s3-minio
+        key: connection
+    backups:
+      bucket: gitlab-backup
+      tmpBucket: gitlab-tmp
+
   ingress:
     configureCertmanager: false
 
@@ -23,11 +62,42 @@ global:
   minio:
     enabled: false
 
+gitlab:
+  gitlab-shell:
+    minReplicas: 1
+    maxReplicas: 1
+
+  sidekiq:
+    annotations:
+      consul.hashicorp.com/connect-inject: "true"
+      consul.hashicorp.com/connect-service: gitlab-sidekiq
+      consul.hashicorp.com/connect-service-upstream: "postgresql:5432"
+    minReplicas: 1
+    maxReplicas: 1
+
+  task-runner:
+    backups:
+      objectStorage:
+        config:
+          secret: s3cmd-config
+          key: config
+
+  webservice:
+    annotations:
+      consul.hashicorp.com/connect-inject: "true"
+      consul.hashicorp.com/connect-service: gitlab-webservice
+      consul.hashicorp.com/connect-service-upstreams: "postgresql:5432"
+    minReplicas: 1
+    maxReplicas: 1
+
+nginx-ingress:
+  enabled: false
+
 postgresql:
-  persistence:
-    enabled: true
-    storageClass: gitlab-postgresql-data
-    size: 10Gi
+  install: false
+
+prometheus:
+  install: false
 
 redis:
   persistence:
@@ -35,5 +105,7 @@ redis:
     storageClass: gitlab-redis-data
     size: 10Gi
 
-prometheus:
-  install: false
+registry:
+  hpa:
+    minReplicas: 1
+    maxReplicas: 1
