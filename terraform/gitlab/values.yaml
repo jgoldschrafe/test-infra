@@ -6,8 +6,6 @@ global:
     https: true
 
   psql:
-    # TODO: Connect to PostgreSQL through Consul Connect
-    # host: localhost
     host: postgresql.postgresql.svc.cluster.local
     port: 5432
     username: gitlab
@@ -71,10 +69,6 @@ gitlab:
     maxReplicas: 1
 
   sidekiq:
-    annotations:
-      consul.hashicorp.com/connect-inject: "true"
-      consul.hashicorp.com/connect-service: gitlab-sidekiq
-      consul.hashicorp.com/connect-service-upstream: "postgresql:5432"
     minReplicas: 1
     maxReplicas: 1
 
@@ -86,10 +80,6 @@ gitlab:
           key: config
 
   webservice:
-    annotations:
-      consul.hashicorp.com/connect-inject: "true"
-      consul.hashicorp.com/connect-service: gitlab-webservice
-      consul.hashicorp.com/connect-service-upstreams: "postgresql:5432"
     minReplicas: 1
     maxReplicas: 1
 
