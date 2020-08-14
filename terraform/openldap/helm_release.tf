@@ -3,7 +3,7 @@
 #
 
 resource "helm_release" "openldap" {
-  namespace = data.terraform_remote_state.openldap_storage.outputs.openldap_namespace
+  namespace = kubernetes_namespace.openldap.metadata[0].name
   name      = "openldap"
 
   chart      = "../../charts/openldap"

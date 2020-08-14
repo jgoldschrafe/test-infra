@@ -26,4 +26,6 @@ resource "kubernetes_manifest" "openldap_tls_certificate" {
       }
     }
   }
+
+  depends_on = [kubernetes_namespace.openldap]
 }

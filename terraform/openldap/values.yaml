@@ -9,6 +9,6 @@ tls:
 
 persistence:
   enabled: true
-  storageClass: openldap-data
+  storageClass: openebs-hostpath
 
 logLevel: trace
