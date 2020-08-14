@@ -12,7 +12,7 @@ locals {
 
 resource "kubernetes_secret" "root_ca" {
   metadata {
-    namespace = data.terraform_remote_state.vault_storage.outputs.vault_namespace
+    namespace = kubernetes_namespace.vault.metadata[0].name
     name      = "root-ca-certificate"
   }
 
@@ -26,7 +26,7 @@ resource "kubernetes_secret" "root_ca" {
 
 resource "kubernetes_secret" "bootstrap_ca" {
   metadata {
-    namespace = data.terraform_remote_state.vault_storage.outputs.vault_namespace
+    namespace = kubernetes_namespace.vault.metadata[0].name
     name      = "bootstrap-ca-certificate"
   }
 
@@ -40,7 +40,7 @@ resource "kubernetes_secret" "bootstrap_ca" {
 
 resource "kubernetes_secret" "vault" {
   metadata {
-    namespace = data.terraform_remote_state.vault_storage.outputs.vault_namespace
+    namespace = kubernetes_namespace.vault.metadata[0].name
     name      = "vault-certificate"
   }
 
