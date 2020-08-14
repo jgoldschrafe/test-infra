@@ -3,7 +3,7 @@
 #
 
 resource "helm_release" "consul" {
-  namespace = "consul"
+  namespace = kubernetes_namespace.consul.metadata[0].name
   name      = "consul"
 
   repository = "https://helm.releases.hashicorp.com"
