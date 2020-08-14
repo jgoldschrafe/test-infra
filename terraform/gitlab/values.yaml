@@ -42,6 +42,20 @@ global:
       bucket: gitlab-backup
       tmpBucket: gitlab-tmp
 
+    ldap:
+      enabled: true
+      preventSignin: false
+      servers:
+        main:
+          label: 'LDAP'
+          # FIXME: Working LDAPS or starttls would be nice
+          host: openldap.openldap.svc.cluster.local
+          port: 389
+          bind_dn: cn=readonly,dc=test,dc=local
+          bind_pw:
+            secret: ldap-bind
+            key: password
+
   ingress:
     configureCertmanager: false
     class: nginx
@@ -61,7 +75,7 @@ gitlab:
   gitaly:
     persistence:
       enabled: true
-      storageClass: gitlab-gitaly-data
+      storageClass: openebs-hostpath
       size: 10Gi
 
   gitlab-shell:
@@ -96,7 +110,7 @@ redis:
   master:
     persistence:
       enabled: true
-      storageClass: gitlab-redis-data
+      storageClass: openebs-hostpath
       size: 10Gi
 
 registry:

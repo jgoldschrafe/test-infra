@@ -1,5 +1,5 @@
 #
-# Kubernetes secrets
+# MinIO
 #
 
 data "kubernetes_secret" "minio" {
@@ -39,5 +39,20 @@ access_key = ${data.kubernetes_secret.minio.data.accesskey}
 secret_key = ${data.kubernetes_secret.minio.data.secretkey}
 bucket_location = us-east-1
 EOT
+  }
+}
+
+#
+# LDAP authentication
+#
+
+resource "kubernetes_secret" "ldap_bind" {
+  metadata {
+    namespace = "gitlab"
+    name      = "ldap-bind"
+  }
+
+  data = {
+    password = "password"
   }
 }
