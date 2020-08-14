@@ -16,7 +16,7 @@ resource "random_password" "gitlab" {
 
 resource "kubernetes_secret" "gitlab_postgresql" {
   metadata {
-    namespace = "gitlab"
+    namespace = kubernetes_namespace.gitlab.metadata[0].name
     name      = "gitlab-postgresql"
   }
 

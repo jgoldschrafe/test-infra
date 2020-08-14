@@ -36,4 +36,6 @@ resource "kubernetes_manifest" "gitlab_tls_certificate" {
       }
     }
   }
+
+  depends_on = [kubernetes_namespace.gitlab]
 }

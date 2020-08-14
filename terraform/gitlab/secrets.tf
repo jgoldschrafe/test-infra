@@ -11,7 +11,7 @@ data "kubernetes_secret" "minio" {
 
 resource "kubernetes_secret" "rails_s3_minio" {
   metadata {
-    namespace = "gitlab"
+    namespace = kubernetes_namespace.gitlab.metadata[0].name
     name      = "rails-s3-minio"
   }
 
@@ -28,7 +28,7 @@ EOT
 
 resource "kubernetes_secret" "s3cmd_config" {
   metadata {
-    namespace = "gitlab"
+    namespace = kubernetes_namespace.gitlab.metadata[0].name
     name      = "s3cmd-config"
   }
 
@@ -48,7 +48,7 @@ EOT
 
 resource "kubernetes_secret" "ldap_bind" {
   metadata {
-    namespace = "gitlab"
+    namespace = kubernetes_namespace.gitlab.metadata[0].name
     name      = "ldap-bind"
   }
 
