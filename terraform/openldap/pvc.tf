@@ -13,4 +13,6 @@ resource "kubernetes_persistent_volume_claim" "openldap" {
       }
     }
   }
+
+  wait_until_bound = false
 }
