@@ -15,6 +15,7 @@ resource "helm_release" "openldap" {
 
   depends_on = [
     kubernetes_manifest.openldap_tls_certificate,
+    kubernetes_persistent_volume_claim.openldap,
     kubernetes_secret.openldap,
   ]
 }

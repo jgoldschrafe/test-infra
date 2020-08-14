@@ -7,7 +7,7 @@ provider "helm" {
 }
 
 provider "kubernetes" {
-  version = "~> 1.11"
+  version = "~> 1.12"
 
   config_context = "docker-desktop"
 }
