@@ -6,5 +6,4 @@ intermediate signed by an offline root CA.
 Dependencies
 ============
 - `bootstrap-pki`
-- `vault-storage`
 - `vault`
