@@ -8,7 +8,7 @@ server:
   replicas: 1
   bootstrapExpect: 1
   storage: 10Gi
-  storageClass: consul-data
+  storageClass: openebs-hostpath
 
 client:
   enabled: true
@@ -18,10 +18,10 @@ dns:
   enabled: true
   clusterIP: 10.99.247.81
 
-ingressGateways:
-  enabled: true
-  defaults:
-    replicas: 1
+#ingressGateways:
+#  enabled: true
+#  defaults:
+#    replicas: 1
 
 ui:
   enabled: true
