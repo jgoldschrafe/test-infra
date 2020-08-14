@@ -39,7 +39,7 @@ resources:
 
 persistence:
   enabled: true
-  storageClass: minio-data
+  storageClass: openebs-hostpath
   size: 10Gi
 
 podAnnotations:
