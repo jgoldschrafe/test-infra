@@ -13,5 +13,8 @@ resource "helm_release" "openldap" {
     "${file("values.yaml")}"
   ]
 
-  depends_on = [kubernetes_manifest.openldap_tls_certificate]
+  depends_on = [
+    kubernetes_manifest.openldap_tls_certificate,
+    kubernetes_secret.openldap,
+  ]
 }

@@ -11,4 +11,5 @@ persistence:
   enabled: true
   storageClass: openebs-hostpath
 
+existingSecret: openldap
 logLevel: trace

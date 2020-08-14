@@ -15,3 +15,7 @@ provider "kubernetes" {
 provider "kubernetes-alpha" {
   config_path = "~/.kube/config"
 }
+
+provider "random" {
+  version = "~> 2.3"
+}
