@@ -3,7 +3,7 @@
 #
 
 resource "helm_release" "postgresql" {
-  namespace = data.terraform_remote_state.postgresql_storage.outputs.namespace
+  namespace = kubernetes_namespace.postgresql.metadata[0].name
   name      = "postgresql"
 
   repository = "https://charts.bitnami.com/bitnami"
