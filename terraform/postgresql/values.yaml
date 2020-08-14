@@ -1,7 +1,7 @@
 ---
 persistence:
   enabled: true
-  storageClass: postgresql-data
+  storageClass: openebs-hostpath
   size: 10Gi
 
 master:
