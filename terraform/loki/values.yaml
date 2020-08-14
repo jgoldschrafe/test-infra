@@ -14,5 +14,9 @@ loki:
       hosts:
       - loki.test.local
 
+  persistence:
+    enabled: true
+    storageClass: openebs-hostpath
+
   podAnnotations:
     "consul.hashicorp.com/connect-inject": "true"
