@@ -21,4 +21,6 @@ resource "kubernetes_manifest" "jenkins_tls_certificate" {
       }
     }
   }
+
+  depends_on = [kubernetes_namespace.jenkins]
 }
