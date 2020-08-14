@@ -1,9 +1,12 @@
 ---
+master:
+  podAnnotations:
+    consul.hashicorp.com/connect-inject: "true"
+
+volumePermissions:
+  enabled: true
+
 persistence:
   enabled: true
   storageClass: openebs-hostpath
   size: 10Gi
-
-master:
-  podAnnotations:
-    consul.hashicorp.com/connect-inject: "true"
