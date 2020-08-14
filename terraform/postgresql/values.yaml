@@ -6,6 +6,11 @@ master:
 volumePermissions:
   enabled: true
 
+pgHbaConfiguration: |-
+  local all all trust
+  host all all localhost trust
+  host all all 0.0.0.0/0 md5
+
 persistence:
   enabled: true
   storageClass: openebs-hostpath
