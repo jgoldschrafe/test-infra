@@ -13,7 +13,7 @@ alertmanager:
           - alertmanager.test.local
 
   persistentVolume:
-    storageClass: alertmanager-data
+    storageClass: openebs-hostpath
 
   podAnnotations:
     consul.hashicorp.com/connect-inject: "true"
@@ -34,7 +34,7 @@ pushgateway:
           - pushgateway.test.local
 
   persistentVolume:
-    storageClass: pushgateway-data
+    storageClass: openebs-hostpath
 
   podAnnotations:
     consul.hashicorp.com/connect-inject: "true"
@@ -56,7 +56,7 @@ server:
           - prometheus.test.local
 
   persistentVolume:
-    storageClass: prometheus-data
+    storageClass: openebs-hostpath
 
   podAnnotations:
     consul.hashicorp.com/connect-inject: "true"
