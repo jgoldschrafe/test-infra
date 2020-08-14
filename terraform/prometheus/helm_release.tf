@@ -3,7 +3,7 @@
 #
 
 resource "helm_release" "prometheus" {
-  namespace = data.terraform_remote_state.prometheus_storage.outputs.prometheus_namespace
+  namespace = kubernetes_namespace.prometheus.metadata[0].name
   name      = "prometheus"
 
   repository = "https://kubernetes-charts.storage.googleapis.com"

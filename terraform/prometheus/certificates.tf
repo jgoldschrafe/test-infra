@@ -25,6 +25,8 @@ resource "kubernetes_manifest" "alertmanager_tls_certificate" {
       }
     }
   }
+
+  depends_on = [kubernetes_namespace.prometheus]
 }
 
 #
@@ -54,6 +56,8 @@ resource "kubernetes_manifest" "prometheus_tls_certificate" {
       }
     }
   }
+
+  depends_on = [kubernetes_namespace.prometheus]
 }
 
 #
@@ -83,4 +87,6 @@ resource "kubernetes_manifest" "pushgateway_certificate" {
       }
     }
   }
+
+  depends_on = [kubernetes_namespace.prometheus]
 }
