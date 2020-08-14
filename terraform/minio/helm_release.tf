@@ -3,7 +3,7 @@
 #
 
 resource "helm_release" "minio" {
-  namespace = "minio"
+  namespace = kubernetes_namespace.minio.metadata[0].name
   name      = "minio"
 
   repository = "https://helm.min.io/"

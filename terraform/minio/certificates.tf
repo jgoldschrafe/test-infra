@@ -30,4 +30,6 @@ resource "kubernetes_manifest" "minio_tls_certificate" {
       }
     }
   }
+
+  depends_on = [kubernetes_namespace.minio]
 }
