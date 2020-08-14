@@ -20,4 +20,4 @@ master:
 
 persistence:
   enabled: true
-  storageClass: jenkins-data
+  storageClass: openebs-hostpath
