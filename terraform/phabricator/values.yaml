@@ -1,0 +1,22 @@
+---
+phabricatorHost: phabricator.test.local
+phabricatorFirstName: Firstname
+phabricatorLastName: Lastname
+
+ingress:
+  enabled: true
+  hosts:
+    - name: phabricator.test.local
+      path: /
+      tls: true
+      tlsSecret: phabricator-tls
+
+persistence:
+  enabled: true
+  storageClass: openebs-hostpath
+
+mariadb:
+  master:
+    persistence:
+      enabled: true
+      storageClass: openebs-hostpath
