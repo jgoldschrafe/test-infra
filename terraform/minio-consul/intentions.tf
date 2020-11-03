@@ -1,5 +1,5 @@
 #
-# Consul intention
+# Consul intentions for Minio
 #
 
 resource "consul_intention" "minio_gitlab" {

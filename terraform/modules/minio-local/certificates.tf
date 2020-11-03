@@ -1,15 +1,12 @@
-#
-# cert-manager Certificate resources
-#
-
+# FIXME: All params currently hardcoded due to kubernetes-alpha provider issue
 resource "kubernetes_manifest" "minio_tls_certificate" {
   provider = kubernetes-alpha
 
   manifest = {
     apiVersion = "cert-manager.io/v1alpha2"
-    kind = "Certificate"
+    kind       = "Certificate"
     metadata = {
-      name = "minio-tls"
+      name      = "minio-tls"
       namespace = "minio"
     }
     spec = {
@@ -24,12 +21,10 @@ resource "kubernetes_manifest" "minio_tls_certificate" {
         "minio.minio.svc.cluster.local",
       ],
       issuerRef = {
-        name = "default-issuer" # FIXME: hardcoded
-        kind = "ClusterIssuer"
+        name  = "default-issuer"
+        kind  = "ClusterIssuer"
         group = "cert-manager.io"
       }
     }
   }
-
-  depends_on = [kubernetes_namespace.minio]
 }

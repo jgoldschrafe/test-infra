@@ -8,7 +8,7 @@ resource "helm_release" "minio" {
 
   repository = "https://helm.min.io/"
   chart      = "minio"
-  version    = "6.0.4"
+  version    = "8.0.0"
 
   values = [
     "${file("values.yaml")}"

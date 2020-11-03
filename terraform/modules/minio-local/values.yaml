@@ -21,6 +21,9 @@ buckets:
   - name: gitlab-uploads
     policy: none
     purge: false
+  - name: velero
+    policy: none
+    purge: false
 
 ingress:
   enabled: true
