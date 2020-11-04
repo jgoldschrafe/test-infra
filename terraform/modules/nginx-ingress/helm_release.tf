@@ -8,22 +8,6 @@ resource "helm_release" "nginx-ingress" {
 
   values = [
     file("${path.module}/values.yaml"),
-    jsonencode({
-      controller = {
-        service = {
-          type = "NodePort"
-          httpPort = {
-            nodePort = 30080
-          }
-          httpsPort = {
-            nodePort = 30443
-          }
-        }
-      }
-  
-      prometheus = {
-        create = true
-      }
-    }),
+    jsonencode(var.values),
   ]
 }

@@ -1,11 +1,11 @@
 variable "chart_version" {
-  description = "Helm chart version for nginx-ingress"
+  description = "Helm chart version for ingress-nginx"
   type        = string
-  default     = "0.6.0"
+  default     = "3.8.0"
 }
 
 variable "namespace" {
-  description = "Kubernetes namespace for nginx-ingress resources"
+  description = "Kubernetes namespace for ingress-nginx resources"
   type        = string
 }
 

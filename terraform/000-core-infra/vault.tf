@@ -34,6 +34,6 @@ module "vault" {
   }
 
   depends_on = [
-    module.nginx-ingress,
+    module.ingress-nginx,
   ]
 }

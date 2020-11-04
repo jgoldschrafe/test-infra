@@ -1,3 +1,15 @@
+variable "ingress_http_port" {
+  description = "HTTP port for ingress"
+  type        = number
+  default     = 30080
+}
+
+variable "ingress_https_port" {
+  description = "HTTPS port for ingress"
+  type        = number
+  default     = 30443
+}
+
 variable "kubernetes_config_context" {
   description = "Config context to provide to the hashicorp/kubernetes provider"
   type        = string
@@ -20,9 +32,9 @@ output "bootstrap_ca" {
   value       = module.bootstrap-ca.ca
 }
 
-output "nginx_ingress_namespace" {
-  description = "Kubernetes namespace for nginx-ingress resources"
-  value       = module.nginx-ingress-namespace.name
+output "ingress_nginx_namespace" {
+  description = "Kubernetes namespace for ingress-nginx resources"
+  value       = module.ingress-nginx-namespace.name
 }
 
 output "vault_namespace" {
