@@ -1,0 +1,21 @@
+---
+server:
+  enabled: true
+  replicas: 1
+  bootstrapExpect: 1
+  storage: 10Gi
+  storageClass: openebs-hostpath
+
+client:
+  enabled: true
+  grpc: true
+
+dns:
+  enabled: true
+
+ui:
+  enabled: true
+
+connectInject:
+  enabled: true
+  imageEnvoy: envoyproxy/envoy:v1.13.1
