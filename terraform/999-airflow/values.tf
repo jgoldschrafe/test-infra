@@ -9,3 +9,13 @@ variable "airflow_namespace" {
   type        = string
   default     = "airflow"
 }
+
+variable "issuer_ref" {
+  description = "issuerRef for Certificate resources"
+  type        = map
+  default = {
+    name  = "default-issuer"
+    kind  = "ClusterIssuer"
+    group = "cert-manager.io"
+  }
+}

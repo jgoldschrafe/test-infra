@@ -1,57 +1,23 @@
-locals {
-  flower_dns_names = [
-    var.flower.host,
-    "airflow-flower",
-    "airflow-flower.${var.namespace}",
-    "airflow-flower.${var.namespace}.svc",
-    "airflow-flower.${var.namespace}.svc.${local.cluster_domain_components[0]}",
-    "airflow-flower.${var.namespace}.svc.${local.cluster_domain_components[0]}.${local.cluster_domain_components[1]}",
-  ]
+module "airflow_flower_tls_certificate" {
+  source = "../k8s-service-certificate"
 
-  web_dns_names = [
-    var.web.host,
-    "airflow-web",
-    "airflow-web.${var.namespace}",
-    "airflow-web.${var.namespace}.svc",
-    "airflow-web.${var.namespace}.svc.${local.cluster_domain_components[0]}",
-    "airflow-web.${var.namespace}.svc.${local.cluster_domain_components[0]}.${local.cluster_domain_components[1]}",
-  ]
+  namespace      = var.namespace
+  cluster_domain = var.cluster_domain
+  service     = "airflow-flower"
+
+  common_name = var.flower.host
+  hosts       = [var.flower.host]
+  issuer_ref  = var.flower.certificate.issuer_ref
 }
 
-resource "kubernetes_manifest" "airflow_flower_tls_certificate" {
-  provider = kubernetes-alpha
+module "airflow_web_tls_certificate" {
+  source = "../k8s-service-certificate"
 
-  manifest = {
-    apiVersion = "cert-manager.io/v1alpha2"
-    kind = "Certificate"
-    metadata = {
-      name = "airflow-flower-tls"
-      namespace = var.namespace
-    }
-    spec = {
-      secretName = "airflow-flower-tls"
-      commonName = var.flower.host
-      dnsNames = local.flower_dns_names
-      issuerRef = var.flower.certificate.issuer_ref
-    }
-  }
-}
+  namespace      = var.namespace
+  cluster_domain = var.cluster_domain
+  service     = "airflow-web"
 
-resource "kubernetes_manifest" "airflow_web_tls_certificate" {
-  provider = kubernetes-alpha
-
-  manifest = {
-    apiVersion = "cert-manager.io/v1alpha2"
-    kind = "Certificate"
-    metadata = {
-      name = "airflow-web-tls"
-      namespace = var.namespace
-    }
-    spec = {
-      secretName = "airflow-web-tls"
-      commonName = var.web.host
-      dnsNames = local.web_dns_names
-      issuerRef = var.web.certificate.issuer_ref
-    }
-  }
+  common_name = var.web.host
+  hosts       = [var.web.host]
+  issuer_ref  = var.web.certificate.issuer_ref
 }

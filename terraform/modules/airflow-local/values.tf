@@ -20,7 +20,7 @@ variable "web" {
   description = "Web server configuration"
   type = object({
     base_url = string
-    host = string
+    host     = string
     certificate = object({
       issuer_ref = object({
         name  = string

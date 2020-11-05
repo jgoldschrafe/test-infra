@@ -12,11 +12,7 @@ module "airflow" {
   flower = {
     host = "airflow-flower.test.local"
     certificate = {
-      issuer_ref = {
-        name  = "default-issuer"
-        kind  = "ClusterIssuer"
-        group = "cert-manager.io"
-      }
+      issuer_ref = var.issuer_ref
     }
   }
 
@@ -24,11 +20,7 @@ module "airflow" {
     host = "airflow.test.local"
     base_url = "https://airflow.test.local:30443"
     certificate = {
-      issuer_ref = {
-        name  = "default-issuer"
-        kind  = "ClusterIssuer"
-        group = "cert-manager.io"
-      }
+      issuer_ref = var.issuer_ref
     }
   }
 

@@ -8,15 +8,15 @@ resource "tls_cert_request" "intermediate_ca" {
   private_key_pem = tls_private_key.intermediate_ca.private_key_pem
 
   subject {
-    common_name         = var.subject.common_name
-    organization        = var.subject.organization
-    organizational_unit = var.subject.organizational_unit
-    street_address      = var.subject.street_address
-    locality            = var.subject.locality
-    province            = var.subject.province
-    country             = var.subject.country
-    postal_code         = var.subject.postal_code
-    serial_number       = var.subject.serial_number
+    common_name         = var.ca.subject.common_name
+    organization        = var.ca.subject.organization
+    organizational_unit = var.ca.subject.organizational_unit
+    street_address      = var.ca.subject.street_address
+    locality            = var.ca.subject.locality
+    province            = var.ca.subject.province
+    country             = var.ca.subject.country
+    postal_code         = var.ca.subject.postal_code
+    serial_number       = var.ca.subject.serial_number
   }
 }
 

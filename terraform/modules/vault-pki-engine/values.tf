@@ -8,18 +8,20 @@ variable "signing_ca" {
   })
 }
 
-variable "subject" {
-  description = "Certificate subject"
+variable "ca" {
+  description = "Certficate authority settings"
   type = object({
-    common_name         = string
-    organization        = string
-    organizational_unit = string
-    street_address      = list(string)
-    locality            = string
-    province            = string
-    country             = string
-    postal_code         = string
-    serial_number       = string
+    subject = object({
+      common_name         = string
+      organization        = string
+      organizational_unit = string
+      street_address      = list(string)
+      locality            = string
+      province            = string
+      country             = string
+      postal_code         = string
+      serial_number       = string
+    })
   })
 }
 
