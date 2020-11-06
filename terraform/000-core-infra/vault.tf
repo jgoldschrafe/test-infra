@@ -4,6 +4,10 @@ module "vault-namespace" {
   name = "vault"
 }
 
+module "vault-consul-sidecar" {
+  source = "../modules/consul-sidecar"
+}
+
 module "vault" {
   source = "../modules/vault-standalone"
 
@@ -26,12 +30,9 @@ module "vault" {
   }
 
   namespace = module.vault-namespace.name
-
-  values = {
-    dataStorage = {
-      storageClass = "openebs-hostpath"
-    }
-  }
+  values = [
+    jsonencode(module.vault-consul-sidecar.values),
+  ]
 
   depends_on = [
     module.ingress-nginx,

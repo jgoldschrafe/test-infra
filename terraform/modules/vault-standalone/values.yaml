@@ -1,6 +1,6 @@
 ---
 certs:
-  secretName: vault-certificate
+  secretName: vault-tls
 
 server:
   ingress:
@@ -8,10 +8,6 @@ server:
     annotations:
       kubernetes.io/ingress.class: nginx
       kubernetes.io/tls-acme: "false"
-    hosts: []
-    tls:
-      - secretName: vault-certificate
-        hosts: []
 
   standalone:
     enabled: true

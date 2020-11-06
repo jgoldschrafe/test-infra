@@ -30,6 +30,6 @@ variable "namespace" {
 
 variable "values" {
   description = "Additional values to apply to the Helm chart"
-  type        = map
-  default     = {}
+  type        = list(string)
+  default     = []
 }
