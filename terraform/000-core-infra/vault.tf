@@ -31,7 +31,11 @@ module "vault" {
 
   namespace = module.vault-namespace.name
   values = [
-    jsonencode(module.vault-consul-sidecar.values),
+    jsonencode({
+      server = {
+        annotations = module.vault-consul-sidecar.values.podAnnotations
+      }
+    }),
   ]
 
   depends_on = [
