@@ -6,6 +6,8 @@ module "vault-namespace" {
 
 module "vault-consul-sidecar" {
   source = "../modules/consul-sidecar"
+
+  service_upstreams = "openldap:1389"
 }
 
 module "vault" {
@@ -30,7 +32,8 @@ module "vault" {
   }
 
   namespace = module.vault-namespace.name
-  values = [
+
+  extra_values = [
     jsonencode({
       server = {
         annotations = module.vault-consul-sidecar.values.podAnnotations

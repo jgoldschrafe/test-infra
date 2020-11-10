@@ -1,4 +1,7 @@
 ---
+global:
+  imageEnvoy: envoyproxy/envoy:v1.13.1
+
 server:
   enabled: true
   replicas: 1
@@ -9,6 +12,10 @@ server:
 client:
   enabled: true
   grpc: true
+  updateStrategy: |
+    rollingUpdate:
+      maxUnavailable: 100%
+    type: RollingUpdate
 
 dns:
   enabled: true
@@ -18,4 +25,13 @@ ui:
 
 connectInject:
   enabled: true
-  imageEnvoy: envoyproxy/envoy:v1.13.1
+
+ingressGateways:
+  enabled: true
+  defaults:
+    replicas: 1
+
+syncCatalog:
+  enabled: true
+  toConsul: true
+  default: true

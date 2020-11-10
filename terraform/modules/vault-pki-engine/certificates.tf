@@ -38,6 +38,13 @@ resource "tls_locally_signed_cert" "intermediate_ca" {
   validity_period_hours = 43800 # 5 years
 }
 
+locals {
+  cert_chain_pem = join("\n", [
+    tls_locally_signed_cert.intermediate_ca.cert_pem,
+    var.signing_ca.cert_chain,
+  ])
+}
+
 resource "local_file" "intermediate_ca_private_key" {
   filename             = var.private_key_path
   sensitive_content    = tls_private_key.intermediate_ca.private_key_pem
@@ -47,7 +54,14 @@ resource "local_file" "intermediate_ca_private_key" {
 
 resource "local_file" "intermediate_ca_certificate" {
   filename             = var.certificate_path
-  sensitive_content    = tls_locally_signed_cert.intermediate_ca.cert_pem
+  content              = tls_locally_signed_cert.intermediate_ca.cert_pem
+  file_permission      = "0644"
+  directory_permission = "0755"
+}
+
+resource "local_file" "intermediate_ca_certificate_chain" {
+  filename             = var.certificate_chain_path
+  content              = local.cert_chain_pem
   file_permission      = "0644"
   directory_permission = "0755"
 }

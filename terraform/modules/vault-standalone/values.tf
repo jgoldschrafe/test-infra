@@ -28,7 +28,7 @@ variable "namespace" {
   type        = string
 }
 
-variable "values" {
+variable "extra_values" {
   description = "Additional values to apply to the Helm chart"
   type        = list(string)
   default     = []

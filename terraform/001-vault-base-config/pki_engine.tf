@@ -5,6 +5,7 @@ module "vault-pki-engine" {
 
   ca = var.vault_ca
 
-  certificate_path = "certs/intermediate-ca.crt"
-  private_key_path = "certs/intermediate-ca-key.pem"
+  certificate_path       = "certs/intermediate-ca.crt"
+  certificate_chain_path = "certs/intermediate-ca-chain.pem"
+  private_key_path       = "certs/intermediate-ca-key.pem"
 }

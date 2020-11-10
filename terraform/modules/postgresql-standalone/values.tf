@@ -11,6 +11,6 @@ variable "chart_version" {
 
 variable "values" {
   description = "Extra values for Helm chart"
-  type        = string
-  default     = ""
+  type        = list(string)
+  default     = []
 }

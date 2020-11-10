@@ -6,7 +6,7 @@ resource "helm_release" "airflow" {
   namespace = var.namespace
   name      = "airflow"
 
-  repository = "https://kubernetes-charts.storage.googleapis.com"
+  repository = "https://charts.helm.sh/stable"
   chart      = "airflow"
   version    = var.chart_version
 

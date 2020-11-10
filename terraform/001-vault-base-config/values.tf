@@ -5,7 +5,7 @@ variable "kubernetes_config_context" {
 
 variable "vault_ca" {
   description = "Vault CA configuration properties"
-  type        = object({
+  type = object({
     subject = object({
       common_name         = string
       organization        = string

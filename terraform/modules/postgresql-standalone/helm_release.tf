@@ -6,8 +6,10 @@ resource "helm_release" "postgresql" {
   chart      = "postgresql"
   version    = "9.1.4"
 
-  values = [
-    file("${path.module}/values.yaml"),
+  values = concat(
+    [
+      file("${path.module}/values.yaml"),
+    ],
     var.values,
-  ]
+)
 }

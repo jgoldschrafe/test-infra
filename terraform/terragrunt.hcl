@@ -21,6 +21,19 @@ inputs = {
       serial_number       = null
     }
   }
+
+  cert_manager_issuer = {
+    kind  = "ClusterIssuer"
+    name  = "default-issuer"
+    group = "cert-manager.io"
+  }
+
+  consul_ingress_gateway_http_node_port  = 31080
+  consul_ingress_gateway_https_node_port = 31443
+
+  openldap_admin_vault_secret  = "kv/openldap/admin"
+  openldap_bind_vault_secret   = "kv/openldap/bind"
+  openldap_config_vault_secret = "kv/openldap/config"
 }
 
 generate "terraform" {
@@ -48,6 +61,11 @@ terraform {
     local = {
       source  = "hashicorp/local"
       version = "~> 2.0.0"
+    }
+
+    null = {
+      source  = "hashicorp/null"
+      version = "~> 3.0.0"
     }
 
     random = {

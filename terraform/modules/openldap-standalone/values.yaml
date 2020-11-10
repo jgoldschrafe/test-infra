@@ -1,0 +1,14 @@
+---
+# FIXME: The osixia/openldap container has a lot of issues around TLS;
+# current best practice is to ignore TLS and use Consul for local termination.
+#
+# tls:
+#   enabled: true
+#   secret: openldap-tls
+
+persistence:
+  enabled: true
+  existingClaim: openldap
+
+existingSecret: openldap
+logLevel: trace

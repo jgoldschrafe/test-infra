@@ -29,6 +29,6 @@ resource "helm_release" "vault" {
         }
       })
     ],
-    var.values,
+    var.extra_values,
   )
 }

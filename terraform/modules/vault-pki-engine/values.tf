@@ -26,7 +26,12 @@ variable "ca" {
 }
 
 variable "certificate_path" {
-  description = "Location to write the generated certificate"
+  description = "Location to write the generated CA certificate"
+  type        = string
+}
+
+variable "certificate_chain_path" {
+  description = "Location to write the generated CA certificate chain"
   type        = string
 }
 
