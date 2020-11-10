@@ -7,7 +7,7 @@ module "phpldapadmin-namespace" {
 module "phpldapadmin-consul-sidecar" {
   source = "../modules/consul-sidecar"
 
-  service_upstreams = "openldap:1389"
+  service_upstreams = "openldap:389"
 }
 
 module "phpldapadmin" {
@@ -27,11 +27,6 @@ module "phpldapadmin" {
   # Connect to OpenLDAP via injected Consul sidecar
   ldap_hosts = [{
     localhost = [
-      {
-        server = [
-          { port = 1389 },
-        ]
-      },
       {
         login = [
           # FIXME: Parameterize

@@ -9,7 +9,13 @@ variable "chart_version" {
   default     = "9.1.4"
 }
 
-variable "values" {
+variable "postgres_password" {
+  description = "Password for the postgres user account"
+  type        = string
+  default     = null
+}
+
+variable "extra_values" {
   description = "Extra values for Helm chart"
   type        = list(string)
   default     = []

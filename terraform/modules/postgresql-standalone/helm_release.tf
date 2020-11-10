@@ -9,7 +9,10 @@ resource "helm_release" "postgresql" {
   values = concat(
     [
       file("${path.module}/values.yaml"),
+      jsonencode({
+        postgresqlPassword = var.postgres_password
+      }),
     ],
-    var.values,
+    var.extra_values,
 )
 }

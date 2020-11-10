@@ -34,6 +34,7 @@ inputs = {
   openldap_admin_vault_secret  = "kv/openldap/admin"
   openldap_bind_vault_secret   = "kv/openldap/bind"
   openldap_config_vault_secret = "kv/openldap/config"
+  postgresql_postgres_vault_secret = "kv/postgresql/postgres"
 }
 
 generate "terraform" {

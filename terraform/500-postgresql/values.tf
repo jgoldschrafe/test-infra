@@ -9,3 +9,8 @@ variable "postgresql_namespace" {
   type        = string
   default     = "postgresql"
 }
+
+variable "postgresql_postgres_vault_secret" {
+  description = "Vault secret to store generated PostgreSQL password"
+  type        = string
+}
