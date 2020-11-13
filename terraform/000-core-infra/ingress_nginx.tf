@@ -14,14 +14,6 @@ module "ingress-nginx" {
       config = {
         compute-full-forwarded-for = "true"
       }
-
-      service = {
-        type = "NodePort"
-        nodePorts = {
-          http = var.ingress_http_port
-          https = var.ingress_https_port
-        }
-      }
     }
   }
 }

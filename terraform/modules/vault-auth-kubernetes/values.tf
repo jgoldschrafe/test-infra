@@ -3,8 +3,3 @@ variable "kubernetes_config_context" {
   type        = string
   default     = "docker-desktop"
 }
-
-variable "tmpdir" {
-  description = "Path to temporary directory to store Kubernetes state files"
-  default     = "./tmp"
-}
