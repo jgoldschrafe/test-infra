@@ -65,6 +65,6 @@ provider "kubernetes-alpha" {
 }
 
 provider "vault" {
-  address         = "https://vault.test.local:30443"
+  address         = "https://vault.test.local"
   skip_tls_verify = true
 }    

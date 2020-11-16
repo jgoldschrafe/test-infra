@@ -6,6 +6,7 @@ resource "random_password" "postgres" {
 resource "vault_generic_secret" "postgresql_postgres" {
   path = var.postgresql_postgres_vault_secret
   data_json = jsonencode({
+    username=  "postgres"
     password = random_password.postgres.result
   })
 }
