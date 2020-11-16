@@ -10,6 +10,16 @@ variable "ingress_https_port" {
   default     = 30443
 }
 
+variable "nfs_client_provisioner_server" {
+  description = "NFS client provisioner server"
+  type        = string
+}
+
+variable "nfs_client_provisioner_path" {
+  description = "NFS client provisioner path"
+  type        = string
+}
+
 output "root_ca" {
   description = "Root CA"
   value       = module.root-ca.ca

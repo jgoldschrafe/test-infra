@@ -7,10 +7,11 @@ resource "helm_release" "openebs" {
   version    = var.chart_version
 
   values = [
-    yamlencode(merge(yamldecode(file("${path.module}/values.yaml")), {
-      "localprovisioner": {
-        "basePath": var.volume_root_path,
+    file("${path.module}/values.yaml"),
+    jsonencode({
+      localprovisioner = {
+        basePath = var.volume_root_path
       }
-    }))
+    }),
   ]
 }

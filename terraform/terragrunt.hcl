@@ -3,9 +3,6 @@
 inputs = {
   consul_dns_ip = "10.99.247.81"
 
-  ingress_http_port  = 30080
-  ingress_https_port = 30443
-  
   kubernetes_config_context = "docker-desktop"
   
   vault_ca = {
@@ -31,9 +28,16 @@ inputs = {
   consul_ingress_gateway_http_node_port  = 31080
   consul_ingress_gateway_https_node_port = 31443
 
-  openldap_admin_vault_secret  = "kv/openldap/admin"
-  openldap_bind_vault_secret   = "kv/openldap/bind"
-  openldap_config_vault_secret = "kv/openldap/config"
+  nfs_client_provisioner_server = "host.docker.internal"
+  nfs_client_provisioner_path   = "${get_env("HOME")}/Kubernetes/NFS"
+
+  airflow_dags_repo          = "https://github.com/jgoldschrafe/airflow-test-dags"
+  airflow_dags_storage_class = "nfs-local"
+
+  airflow_postgresql_vault_secret  = "kv/airflow/postgresql"
+  openldap_admin_vault_secret      = "kv/openldap/admin"
+  openldap_bind_vault_secret       = "kv/openldap/bind"
+  openldap_config_vault_secret     = "kv/openldap/config"
   postgresql_postgres_vault_secret = "kv/postgresql/postgres"
 }
 
@@ -108,7 +112,7 @@ provider "kubernetes-alpha" {
 }
 
 provider "vault" {
-  address         = "https://vault.test.local:30443"
+  address         = "https://vault.test.local"
   skip_tls_verify = true
 }    
 EOF

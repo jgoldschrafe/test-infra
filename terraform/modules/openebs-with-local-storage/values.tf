@@ -1,7 +1,7 @@
 variable "chart_version" {
   description = "Helm chart version to install"
   type        = string
-  default     = "1.12.3"
+  default     = "2.2.1"
 }
 
 variable "namespace" {

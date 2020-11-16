@@ -17,7 +17,7 @@ module "vault" {
     signing_ca = module.bootstrap-ca.ca
 
     subject = {
-      common_name = "vault.test.local"
+      common_name  = "vault.test.local"
       organization = "Test Infrastructure"
     }
 
