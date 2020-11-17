@@ -18,3 +18,9 @@ variable "secret_key" {
   description = "The secret key for the MinIO instance"
   type        = string
 }
+
+variable "buckets" {
+  description = "List of buckets for the Helm chart"
+  type        = list(map(any))
+  default     = []
+}

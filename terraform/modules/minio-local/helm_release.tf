@@ -9,8 +9,10 @@ resource "helm_release" "minio" {
   values = [
     file("${path.module}/values.yaml"),
     jsonencode({
-      accesskey = var.access_key,
-      secretkey = var.secret_key,
+      existingSecret = "minio"
+      buckets        = var.buckets
+      accesskey      = var.access_key
+      secretkey      = var.secret_key
     }),
   ]
 
