@@ -6,12 +6,15 @@ resource "helm_release" "cert_manager" {
   chart      = "cert-manager"
   version    = var.chart_version
 
-  values = [
-    file("${path.module}/values.yaml"),
-    jsonencode({
-      ingressShim = {
-        defaultIssuerName = "default-issuer"
-      }
-    }),
-  ]
+  values = concat(
+    [
+      file("${path.module}/values.yaml"),
+      jsonencode({
+        ingressShim = {
+          defaultIssuerName = "default-issuer"
+        }
+      }),
+    ],
+    var.extra_values,
+  )
 }

@@ -1,7 +1,7 @@
 variable "chart_version" {
   description = "Helm chart version to install"
   type        = string
-  default     = "v0.16.0"
+  default     = "1.0.4"
 }
 
 variable "namespace" {
@@ -24,4 +24,10 @@ variable "vault_pki_path" {
 variable "vault_url" {
   description = "URL to Vault, as reachable from an Issuer"
   type        = string
+}
+
+variable "extra_values" {
+  description = "Extra values for the Helm chart"
+  type        = list(string)
+  default     = []
 }
