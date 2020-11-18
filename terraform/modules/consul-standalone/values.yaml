@@ -26,12 +26,5 @@ ui:
 connectInject:
   enabled: true
 
-ingressGateways:
-  enabled: true
-  defaults:
-    replicas: 1
-
 syncCatalog:
-  enabled: true
-  toConsul: true
-  default: true
+  enabled: false

@@ -17,25 +17,6 @@ resource "helm_release" "consul" {
       dns = {
         clusterIP = var.dns_ip
       }
-
-      ingressGateways = {
-        defaults = {
-          service = {
-            type = (var.ingress_gateway_http_node_port != null || var.ingress_gateway_https_node_port != null) ? "NodePort" : "ClusterIP"
-
-            ports = [
-              {
-                port = 8080
-                nodePort = var.ingress_gateway_http_node_port
-              },
-              {
-                port = 8443
-                nodePort = var.ingress_gateway_https_node_port
-              }
-            ]
-          }
-        }
-      }
     })
   ]
 }
