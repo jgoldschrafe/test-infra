@@ -6,7 +6,7 @@ resource "helm_release" "airflow" {
   namespace = var.namespace
   name      = "airflow"
 
-  repository = "https://charts.helm.sh/stable"
+  repository = "https://airflow-helm.github.io/charts"
   chart      = "airflow"
   version    = var.chart_version
 
@@ -58,6 +58,11 @@ resource "helm_release" "airflow" {
             }
           }
         }
+      }),
+
+      # Kubernetes executor
+      jsonencode({
+        
       }),
     ],
     var.extra_values,

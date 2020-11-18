@@ -34,7 +34,7 @@ variable "web" {
 variable "chart_version" {
   description = "Helm chart version to install"
   type        = string
-  default     = "7.13.1"
+  default     = "7.14.0"
 }
 
 variable "cluster_domain" {

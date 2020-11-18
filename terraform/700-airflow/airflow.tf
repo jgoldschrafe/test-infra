@@ -1,3 +1,11 @@
+locals {
+  default_issuer_ref = {
+    name  = data.consul_key_prefix.default-issuer.subkeys.name
+    kind  = data.consul_key_prefix.default-issuer.subkeys.kind
+    group = data.consul_key_prefix.default-issuer.subkeys.group
+  }
+}
+
 module "airflow-namespace" {
   source = "../modules/kubernetes-namespace"
 
@@ -18,7 +26,7 @@ module "airflow" {
   flower = {
     host = "airflow-flower.test.local"
     certificate = {
-      issuer_ref = var.issuer_ref
+      issuer_ref = local.default_issuer_ref
     }
   }
 
@@ -26,7 +34,7 @@ module "airflow" {
     host     = "airflow.test.local"
     base_url = "https://airflow.test.local"
     certificate = {
-      issuer_ref = var.issuer_ref
+      issuer_ref = local.default_issuer_ref
     }
   }
 
@@ -55,7 +63,9 @@ module "airflow" {
 
       externalDatabase = {
         type              = "postgres"
-        host              = "localhost"
+        # FIXME: Consul disabled until a good solution is found for batch jobs with sidecars
+        # host              = "localhost"
+        host              = "postgresql.postgresql"
         port              = 5432
         database          = "airflow"
         user              = "airflow"
@@ -64,26 +74,30 @@ module "airflow" {
       }
     }),
 
-    # Git repo sync
-    # jsonencode({
-    #   dags = {
-    #     git = {
-    #       url = var.airflow_dags_repo
-    #       ref = "main"
-    #       gitSync = {
-    #         enabled = true
-    #       }
-    #     }
-    #   }
-    # }),
-
-    # Shared directory for DAGs
+    # Kubernetes executor configuration
     jsonencode({
       dags = {
         persistence = {
           enabled       = true
           existingClaim = kubernetes_persistent_volume_claim.airflow.metadata[0].name
         }
+      }
+
+      airflow = {
+        config = {
+          AIRFLOW__KUBERNETES__NAMESPACE                          = module.airflow-namespace.name
+          AIRFLOW__KUBERNETES__DAGS_VOLUME_CLAIM                  = kubernetes_persistent_volume_claim.airflow.metadata[0].name
+          AIRFLOW__KUBERNETES__LOGS_VOLUME_CLAIM                  = kubernetes_persistent_volume_claim.airflow-logs.metadata[0].name
+          AIRFLOW__KUBERNETES__WORKER_CONTAINER_REPOSITORY        = "airflow-test"
+          AIRFLOW__KUBERNETES__WORKER_CONTAINER_TAG               = "latest"
+          AIRFLOW__KUBERNETES__WORKER_CONTAINER_IMAGE_PULL_POLICY = "Never"
+          AIRFLOW__KUBERNETES__WORKER_SERVICE_ACCOUNT_NAME        = "airflow"
+        }
+      }
+
+      # Fixed worker pods not necessary with KubernetesExecutor
+      workers = {
+        enabled = false
       }
     }),
   ]

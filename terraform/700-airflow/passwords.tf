@@ -4,7 +4,7 @@ resource "random_password" "airflow-postgresql" {
 }
 
 resource "vault_generic_secret" "airflow-postgresql" {
-  path = "kv/airflow/postgresql"
+  path = "secret/airflow/postgresql"
   data_json = jsonencode({
     username = "airflow"
     password = random_password.airflow-postgresql.result
@@ -13,7 +13,7 @@ resource "vault_generic_secret" "airflow-postgresql" {
 
 resource "kubernetes_secret" "airflow-postgresql" {
   metadata {
-    namespace = var.airflow_namespace
+    namespace = module.airflow-namespace.name
     name      = "airflow-postgresql"
   }
 
